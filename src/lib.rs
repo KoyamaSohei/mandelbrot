@@ -28,7 +28,7 @@ pub struct World {
 
 #[wasm_bindgen]
 impl World {
-    pub fn tick(&mut self) {
+    pub fn tick(&mut self,scale: f64,dx: f64,dy: f64) {
         let mut next = self.cells.clone();
         let mut nxts = self.status.clone();
         for row in 0..self.height {
@@ -37,8 +37,8 @@ impl World {
                 let (re,im) = self.cells[idx];
                 let stat = self.status[idx];
                 if stat == Cell::In {
-                    let real = re * re - im * im + (((col * 4) as f64 / self.width as f64) as f64 - 2.0);
-                    let image = (2 as f64) * re * im + (((row * 4) as f64 / self.height as f64) as f64 - 2.0);
+                    let real = re * re - im * im + (((col) as f64 * scale * 4.0 / (self.width as f64)) as f64 - scale * 2.0 * (1.0 - dx));
+                    let image = (2 as f64) * re * im + (((row) as f64 * scale * 4.0 / (self.height as f64)) as f64 - scale * 2.0 * (1.0 - dy));
                     let mut isin = Cell::In;
                     if  real * real + image * image > 2 as f64 {
                         isin = Cell::Out;
@@ -55,9 +55,9 @@ impl World {
         (row * self.width + colmun) as usize
     }
 
-    pub fn new() -> World {
-        let width : u32 = 1000;
-        let height : u32 = 1000;
+    pub fn new(w: u32,h: u32) -> World {
+        let width : u32 = w;
+        let height : u32 = h;
         let mut cells: Vec<(f64,f64)> = vec![(0 as f64,0 as f64);(width*height) as usize];
         let mut status: Vec<Cell> = vec![Cell::In;(width*height) as usize];
         
