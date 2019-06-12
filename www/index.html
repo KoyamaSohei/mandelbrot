@@ -18,9 +18,31 @@
         canvas {
           border: 1px solid #000;
         }
+        .panel {
+          width: 300px;
+          height: 80px;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+        button {
+          background: #f0f0f0;
+        }
       </style>
   </head>
   <body>
+    <div class="panel">
+      <div class="scale">
+        <button class="plus">+</button>
+        <button class="minus">-</button>
+      </div>
+      <div class="move">
+          <button class="up">up</button>
+          <button class="down">down</button>
+          <button class="left">left</button>
+          <button class="right">right</button>
+        </div>
+    </div>
     <canvas id="canvas" ></canvas>
     <script src="./bootstrap.js"></script>
   </body>
