@@ -37,8 +37,8 @@ impl World {
                 let (re,im) = self.cells[idx];
                 let stat = self.status[idx];
                 if stat == Cell::In {
-                    let real = re * re - im * im + (((col) as f64 * scale * 4.0 / (self.width as f64)) as f64 - scale * 2.0 * (1.0 - dx));
-                    let image = (2 as f64) * re * im + (((row) as f64 * scale * 4.0 / (self.height as f64)) as f64 - scale * 2.0 * (1.0 - dy));
+                    let real = re * re - im * im + (((col) as f64  * 4.0 / (scale * self.width as f64)) as f64 - 2.0/ scale) + dx / scale;
+                    let image = 2.0 * re * im + (((row) as f64 * 4.0 / (scale * self.height as f64)) as f64 - 2.0/ scale) - dy / scale;
                     let mut isin = Cell::In;
                     if  real * real + image * image > 2 as f64 {
                         isin = Cell::Out;
