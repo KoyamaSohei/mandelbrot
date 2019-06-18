@@ -36,5 +36,5 @@ const reload = (w,h,x,y,s) => {
   p.set('dx',x);
   p.set('dy',y);
   p.set('scale',s);
-  window.location = `${window.origin}/?${p.toString()}`;
+  window.location = `${window.location.href}/?${p.toString()}`;
 }
